@@ -19,6 +19,19 @@ class SocketCommunication:
     MAX_RECEIVED_CLIENTS = 1
 
 
+class Submarines:
+    """
+    this class contains all the submarine codes
+    """
+
+    NO_SUBMARINE = 0
+    FIVE_LONG_SUBMARINE = 1
+    FOUR_LONG_SUBMARINE = 2
+    FIRST_THREE_LONG_SUBMARINE = 3
+    SECOND_THREE_LONG_SUBMARINE = 4
+    TWO_LONG_SUBMARINE = 5
+
+
 class MessageTypes:
     """
     this class contains all the message type names
@@ -29,3 +42,12 @@ class MessageTypes:
 
     ACCEPT_GAME_MESSAGE_NAME = 'accept_game'
     ACCEPT_GAME_MESSAGE_CODE = 2
+
+    PLACING_INFORM_MESSAGE_NAME = 'placing_inform'
+    PLACING_INFORM_MESSAGE_CODE = 3
+
+    TURN_MESSAGE_NAME = 'turn'
+    TURN_MESSAGE_CODE = 4
+
+    TURN_RESULT_MESSAGE_NAME = 'turn_result'
+    TURN_RESULT_MESSAGE_CODE = 5
