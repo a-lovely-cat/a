@@ -3,7 +3,9 @@ name: game_board.py
 this provides the game board, it basically handles the offline part of the game
 """
 from consts import BoardParameters, Submarines
-
+from submarine import Submarine
+import secrets
+import hashlib
 
 class GameBoard:
 
@@ -13,11 +15,20 @@ class GameBoard:
         """
 
         self.board = [[0 for _ in range(BoardParameters.BOARD_LENGTH)] for _ in range(BoardParameters.BOARD_LENGTH)]
-        self.submarine1 = None
-        self.submarine2 = None
-        self.submarine3 = None
-        self.submarine4 = None
-        self.submarine5 = None
+        self.placing_hash_nonce = secrets.token_bytes(BoardParameters.NONCE_SIZE)
+        self.submarines = {}
+
+    def get_placing_hash(self):
+        """
+        this function calculates the placing hash and returns it
+        :return: the placing hash
+        """
+
+        submarine_calculation = self.placing_hash_nonce
+        for i in range(1, len(Submarines.SUBMARINE_LENGTHS) + 1):
+            submarine_calculation += self.submarines[i].getget_submarine_block_hash()
+            submarine_calculation += self.submarines[i].submarine_angle
+        return hashlib.sha256(submarine_calculation).digest()
 
     def get_board_printable(self):
         """
@@ -59,6 +70,8 @@ class GameBoard:
                 raise ValueError(Submarines.INVALID_PLACEMENT_ERROR)
         if not (Submarines.FIVE_LONG_SUBMARINE <= submarine_identifier <= Submarines.TWO_LONG_SUBMARINE):
             raise ValueError(Submarines.INVALID_SUBMARINE_IDENTIFIER_ERROR)
+        if submarine_identifier in self.submarines:
+            raise ValueError(Submarines.DUPLICATE_SUBMARINE_ERROR)
 
     def add_submarine(self, submarine_identifier, submarine_column, submarine_row, submarine_angle):
         """
@@ -70,8 +83,16 @@ class GameBoard:
         """
 
         self.check_add_submarine_parameters(submarine_identifier, submarine_column, submarine_row, submarine_angle)
-        # I didnt finish this, what happens here is that it places the submarine according to the angle with the
-        # known length, I also wanted to save the submarine so it could be used for the protocol
+
+        if submarine_angle == Submarines.IS_VERTICAL:
+            for i in range(Submarines.SUBMARINE_LENGTHS[submarine_identifier]):
+                self.add_block(submarine_identifier, submarine_column, submarine_row + i)
+        else:
+            for i in range(Submarines.SUBMARINE_LENGTHS[submarine_identifier]):
+                self.add_block(submarine_identifier, submarine_column + i, submarine_row)
+
+        self.submarines[submarine_identifier] = Submarine(submarine_column, submarine_row, submarine_angle,
+                                                          submarine_identifier)
 
     def add_block(self, submarine_identifier, block_column, block_row):
         """
@@ -86,13 +107,13 @@ class GameBoard:
         #  in the outer ring of the block (or in it)
         if ((self.board[block_row][block_column] != 0) or (
                 self.board[block_row + 1][block_column] != 0 and self.board[block_row + 1][
-            block_column] != submarine_identifier) or (
+                block_column] != submarine_identifier) or (
                 self.board[block_row - 1][block_column] != 0 and self.board[block_row - 1][
-            block_column] != submarine_identifier) or (
+                block_column] != submarine_identifier) or (
                 self.board[block_row][block_column + 1] != 0 and self.board[block_row][
-            block_column + 1] != submarine_identifier) or (
+                block_column + 1] != submarine_identifier) or (
                 self.board[block_row][block_column - 1] != 0 and self.board[block_row][
-            block_column - 1] != submarine_identifier) or (
+                block_column - 1] != submarine_identifier) or (
                 self.board[block_row + 1][block_column + 1] != 0) or (
                 self.board[block_row + 1][block_column - 1] != 0) or (
                 self.board[block_row - 1][block_column + 1] != 0) or (

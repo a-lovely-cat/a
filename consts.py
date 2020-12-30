@@ -39,6 +39,7 @@ class Submarines:
 
     INVALID_ANGLE_ERROR = 'invalid angle'
     INVALID_SUBMARINE_IDENTIFIER_ERROR = 'invalid submarine identifier'
+    DUPLICATE_SUBMARINE_ERROR = 'this submarine is already on the board'
     INVALID_PLACEMENT_ERROR = 'invalid placement'
 
 
@@ -76,7 +77,7 @@ class MessagePrintFormats:
         'version: ', 'message type: ', 'sub1 location: ', 'sub1 is horizontal: ', 'sub2 location: ',
         'sub2 is horizontal: ',
         'sub3 location: ', 'sub3 is horizontal: ', 'sub4 location: ', 'sub4 is horizontal: ', 'sub5 location: ',
-        'sub5 is horizontal: ')
+        'sub5 is horizontal: ', 'nonce: ')
     TURN_RESULT_MESSAGE_FORMAT = ('version: ', 'message type: ', 'did hit: ', 'did sink: ')
 
     MESSAGE_FORMAT_FAILED_MESSAGE = 'the message has come is the wrong format'
@@ -90,3 +91,5 @@ class BoardParameters:
     BOARD_LENGTH = 10
     MAXIMUM_BOARDER_BLOCK = 9
     MINIMUM_BORDER_BLOCK = 0
+
+    NONCE_SIZE = 4
