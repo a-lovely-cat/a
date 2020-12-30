@@ -1,10 +1,10 @@
 """
-name: connection_creator.py
+name: message_formatter.py
 this concentrates all the possible message formatters into one object
 """
 from consts import MessageTypes
 from message_formatters import InviteMessageFormatter, AcceptMessageFormatter, PlacingInformMessageFormatter, \
-    TurnMessageFormatter, TurnResultMessageFormatter
+    TurnMessageFormatter, TurnResultMessageFormatter, PlacementInformMessageFormatter
 
 
 class MessageFormatter:
@@ -22,4 +22,6 @@ class MessageFormatter:
                            MessageTypes.PLACING_INFORM_MESSAGE_NAME:
                                PlacingInformMessageFormatter.get_formatted_message,
                            MessageTypes.TURN_MESSAGE_NAME: TurnMessageFormatter.get_formatted_message,
-                           MessageTypes.TURN_RESULT_MESSAGE_NAME: TurnResultMessageFormatter.get_formatted_message}
+                           MessageTypes.TURN_RESULT_MESSAGE_NAME: TurnResultMessageFormatter.get_formatted_message,
+                           MessageTypes.PLACEMENT_INFORM_MESSAGE_NAME:
+                               PlacementInformMessageFormatter.get_formatted_message}

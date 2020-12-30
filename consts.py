@@ -31,6 +31,9 @@ class Submarines:
     SECOND_THREE_LONG_SUBMARINE = 4
     TWO_LONG_SUBMARINE = 5
 
+    IS_VERTICAL = 1
+    IS_HORIZONTAL = 0
+
 
 class MessageTypes:
     """
@@ -51,3 +54,18 @@ class MessageTypes:
 
     TURN_RESULT_MESSAGE_NAME = 'turn_result'
     TURN_RESULT_MESSAGE_CODE = 5
+
+    PLACEMENT_INFORM_MESSAGE_NAME = 'placement_inform'
+    PLACEMENT_INFORM_MESSAGE_CODE = 6
+
+
+class MessagePrintFormats:
+    """
+    this class contains the printout formats of all the messages
+    """
+
+    TURN_MESSAGE_FORMAT = ('version: ', 'message type: ', 'block hash: ')
+
+    MESSAGE_FORMAT_FAILED_MESSAGE = 'the message has come is the wrong format'
+
+

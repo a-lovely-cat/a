@@ -61,3 +61,19 @@ class TurnResultMessageFormatter:
         formatted_message += struct.pack('?', did_hit)
         formatted_message += struct.pack('i', sunken_ship)
         return formatted_message
+
+
+class PlacementInformMessageFormatter:
+    """
+    this class is in charge of formatting the placement inform message
+    """
+
+    @staticmethod
+    def get_formatted_message(submarine1, submarine2, submarine3, submarine4, submarine5):
+        formatted_message = struct.pack('ii', PROTOCOL_VERSION, MessageTypes.PLACEMENT_INFORM_MESSAGE_CODE)
+        formatted_message += struct.pack('i?', submarine1.get_submarine_block_hash(), submarine1.submarine_angle)
+        formatted_message += struct.pack('i?', submarine2.get_submarine_block_hash(), submarine2.submarine_angle)
+        formatted_message += struct.pack('i?', submarine3.get_submarine_block_hash(), submarine3.submarine_angle)
+        formatted_message += struct.pack('i?', submarine4.get_submarine_block_hash(), submarine4.submarine_angle)
+        formatted_message += struct.pack('i?', submarine5.get_submarine_block_hash(), submarine5.submarine_angle)
+        return formatted_message

@@ -54,3 +54,12 @@ class CommunicationManager:
         """
 
         return self.message_receiver.get_received_message()
+
+    def close_connection(self):
+        """
+        this function closes all the available sockets
+        """
+
+        self.player_socket.close()
+        if self.opponent_socket is not None:
+            self.opponent_socket.close()
