@@ -31,8 +31,15 @@ class Submarines:
     SECOND_THREE_LONG_SUBMARINE = 4
     TWO_LONG_SUBMARINE = 5
 
+    SUBMARINE_LENGTHS = {FIVE_LONG_SUBMARINE: 5, FOUR_LONG_SUBMARINE: 4, FIRST_THREE_LONG_SUBMARINE: 3,
+                         SECOND_THREE_LONG_SUBMARINE: 3, TWO_LONG_SUBMARINE: 2}
+
     IS_VERTICAL = 1
     IS_HORIZONTAL = 0
+
+    INVALID_ANGLE_ERROR = 'invalid angle'
+    INVALID_SUBMARINE_IDENTIFIER_ERROR = 'invalid submarine identifier'
+    INVALID_PLACEMENT_ERROR = 'invalid placement'
 
 
 class MessageTypes:
@@ -69,3 +76,11 @@ class MessagePrintFormats:
     MESSAGE_FORMAT_FAILED_MESSAGE = 'the message has come is the wrong format'
 
 
+class BoardParameters:
+    """
+    this class contains all the board constants
+    """
+
+    BOARD_LENGTH = 10
+    MAXIMUM_BOARDER_BLOCK = 9
+    MINIMUM_BORDER_BLOCK = 0
