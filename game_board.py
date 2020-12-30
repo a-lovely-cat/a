@@ -4,7 +4,7 @@ this provides the game board, it basically handles the offline part of the game
 """
 from consts import BoardParameters, Submarines
 
-#this class also calculates the placement hash
+
 class GameBoard:
 
     def __init__(self):
@@ -70,9 +70,8 @@ class GameBoard:
         """
 
         self.check_add_submarine_parameters(submarine_identifier, submarine_column, submarine_row, submarine_angle)
-        #I didnt finish this, what happens here is that it places the submarine according to the angle with the
-        #known length, I also wanted to save the submarine so it could be used for the protocol
-
+        # I didnt finish this, what happens here is that it places the submarine according to the angle with the
+        # known length, I also wanted to save the submarine so it could be used for the protocol
 
     def add_block(self, submarine_identifier, block_column, block_row):
         """

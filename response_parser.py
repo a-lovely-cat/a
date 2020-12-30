@@ -38,3 +38,35 @@ class ResponseParser:
             message_formatted_info = f'{message_formatted_info}{MessagePrintFormats.TURN_MESSAGE_FORMAT[i]}' \
                                      f'{message_raw_info[i]}\n'
         return message_formatted_info
+
+    def get_turn_result_message_info(self, message):
+        """
+        this function returns the given turn message in a readable format
+        :param message: the message we parse
+        :return: the readable and parsed message
+        """
+
+        message_formatted_info = ''
+        message_raw_info = self.parsers[MessageTypes.TURN_RESULT_MESSAGE_NAME](message)
+        if message_raw_info is None:
+            return MessagePrintFormats.MESSAGE_FORMAT_FAILED_MESSAGE
+
+        for i in range(len(MessagePrintFormats.TURN_RESULT_MESSAGE_FORMAT)):
+            message_formatted_info = f'{message_formatted_info}{MessagePrintFormats.TURN_RESULT_MESSAGE_FORMAT[i]}' \
+                                     f'{message_raw_info[i]}\n'
+
+    def get_placement_inform_message_info(self, message):
+        """
+        this function returns the given placement inform message in a readable format
+        :param message: the message we parse
+        :return: the readable and parsed message
+        """
+
+        message_formatted_info = ''
+        message_raw_info = self.parsers[MessageTypes.PLACEMENT_INFORM_MESSAGE_NAME](message)
+        if message_raw_info is None:
+            return MessagePrintFormats.MESSAGE_FORMAT_FAILED_MESSAGE
+
+        for i in range(len(MessagePrintFormats.PLACEMENT_INFORM_MESSAGE_FORMAT)):
+            message_formatted_info = f'{message_formatted_info}' \
+                                     f'{MessagePrintFormats.PLACEMENT_INFORM_MESSAGE_FORMAT[i]}{message_raw_info[i]}\n'

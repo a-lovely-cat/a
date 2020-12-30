@@ -33,8 +33,7 @@ class PlacingInformMessageFormatter:
 
     @staticmethod
     def get_formatted_message(placing_hash):
-        formatted_message = struct.pack('ii', PROTOCOL_VERSION, MessageTypes.PLACING_INFORM_MESSAGE_CODE)
-        formatted_message += placing_hash
+        formatted_message = struct.pack('ii', PROTOCOL_VERSION, MessageTypes.PLACING_INFORM_MESSAGE_CODE, placing_hash)
         return formatted_message
 
 
@@ -56,10 +55,9 @@ class TurnResultMessageFormatter:
     """
 
     @staticmethod
-    def get_formatted_message(did_hit, sunken_ship):
-        formatted_message = struct.pack('ii', PROTOCOL_VERSION, MessageTypes.TURN_RESULT_MESSAGE_CODE)
-        formatted_message += struct.pack('?', did_hit)
-        formatted_message += struct.pack('i', sunken_ship)
+    def get_formatted_message(did_hit, sunken_submarine):
+        formatted_message = struct.pack('ii?i', PROTOCOL_VERSION, MessageTypes.TURN_RESULT_MESSAGE_CODE, did_hit,
+                                        sunken_submarine)
         return formatted_message
 
 
@@ -70,10 +68,10 @@ class PlacementInformMessageFormatter:
 
     @staticmethod
     def get_formatted_message(submarine1, submarine2, submarine3, submarine4, submarine5):
-        formatted_message = struct.pack('ii', PROTOCOL_VERSION, MessageTypes.PLACEMENT_INFORM_MESSAGE_CODE)
-        formatted_message += struct.pack('i?', submarine1.get_submarine_block_hash(), submarine1.submarine_angle)
-        formatted_message += struct.pack('i?', submarine2.get_submarine_block_hash(), submarine2.submarine_angle)
-        formatted_message += struct.pack('i?', submarine3.get_submarine_block_hash(), submarine3.submarine_angle)
-        formatted_message += struct.pack('i?', submarine4.get_submarine_block_hash(), submarine4.submarine_angle)
-        formatted_message += struct.pack('i?', submarine5.get_submarine_block_hash(), submarine5.submarine_angle)
+        formatted_message = struct.pack('iii?i?i?i?i?', PROTOCOL_VERSION, MessageTypes.PLACEMENT_INFORM_MESSAGE_CODE,
+                                        submarine1.get_submarine_block_hash(), submarine1.submarine_angle,
+                                        submarine2.get_submarine_block_hash(), submarine2.submarine_angle,
+                                        submarine3.get_submarine_block_hash(), submarine3.submarine_angle,
+                                        submarine4.get_submarine_block_hash(), submarine4.submarine_angle,
+                                        submarine5.get_submarine_block_hash(), submarine5.submarine_angle)
         return formatted_message

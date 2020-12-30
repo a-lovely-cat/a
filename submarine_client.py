@@ -70,7 +70,7 @@ class SubmarineClient:
         self.communication_manager.send_message(
             self.message_formatter.formatters[MessageTypes.PLACING_INFORM_MESSAGE_NAME](placing_hash))
 
-    def print_opponent_placing_confirmation(self):
+    def print_opponent_placing_inform(self):
         pass
 
     def send_guess_turn(self, block_column, block_row):
@@ -81,7 +81,7 @@ class SubmarineClient:
         """
 
         self.communication_manager.send_message(
-            self.message_formatter.formatters[MessageTypes.TURN_MESSAGE_NAME](block_column, block_column))
+            self.message_formatter.formatters[MessageTypes.TURN_MESSAGE_NAME](block_column, block_row))
 
     def print_opponent_guess_turn(self):
         """
@@ -103,7 +103,13 @@ class SubmarineClient:
             self.message_formatter.formatters[MessageTypes.TURN_RESULT_MESSAGE_NAME](did_hit, sunken_ship))
 
     def print_opponent_turn_result(self):
-        pass
+        """
+        this function prints out the turn result message the opponent has sent in a readable format
+        it also prints out if anything bad happened
+        """
+
+        result_message = self.communication_manager.get_received_message()
+        print(self.response_parser.get_turn_result_message_info(result_message))
 
     def send_placement_inform_message(self, submarine1, submarine2, submarine3, submarine4, submarine5):
         """
@@ -121,4 +127,10 @@ class SubmarineClient:
                                                                                           submarine4, submarine5))
 
     def print_opponent_placement_inform_message(self):
-        pass
+        """
+        this function prints out the placement inform message the opponent has sent in a readable format
+        it also prints out if anything bad happened
+        """
+
+        result_message = self.communication_manager.get_received_message()
+        print(self.response_parser.get_placement_inform_message_info(result_message))

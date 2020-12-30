@@ -72,6 +72,12 @@ class MessagePrintFormats:
     """
 
     TURN_MESSAGE_FORMAT = ('version: ', 'message type: ', 'block hash: ')
+    PLACEMENT_INFORM_MESSAGE_FORMAT = (
+        'version: ', 'message type: ', 'sub1 location: ', 'sub1 is horizontal: ', 'sub2 location: ',
+        'sub2 is horizontal: ',
+        'sub3 location: ', 'sub3 is horizontal: ', 'sub4 location: ', 'sub4 is horizontal: ', 'sub5 location: ',
+        'sub5 is horizontal: ')
+    TURN_RESULT_MESSAGE_FORMAT = ('version: ', 'message type: ', 'did hit: ', 'did sink: ')
 
     MESSAGE_FORMAT_FAILED_MESSAGE = 'the message has come is the wrong format'
 
